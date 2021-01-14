@@ -5,7 +5,7 @@ int mySqrt(int x){
     do
     {
         a = (x / a + a) / 2.0;
-        accuracy = a * a - (double)x;
+        accuracy = a * a - x;
     }while(accuracy >= 0.01);
 
     return (int)a;
