@@ -1,5 +1,8 @@
+#define MAX 2147483647      //max int, 2^31 - 1
+#define MIN -2147483648     //min int, -2^31
+
 int myAtoi(char * s){
-    int num = 0;
+    long num = 0;
     int sign;
 
     if(*s >= 'A' && *s <= 'Z' || *s >= 'a' && *s <= 'z')
@@ -9,10 +12,9 @@ int myAtoi(char * s){
         s++;
     
     sign = 1;
-
     if(*s == '+' || *s == '-')
     {
-        sign = *s == '+' ? 1 : -1;
+        sign = *s == '-' ? -1 : 1;
         s++;
     }
 
@@ -21,14 +23,10 @@ int myAtoi(char * s){
 
     for(; *s >= '0' && *s <= '9'; s++)
     {
-        //garantee -2^31 <= num <= 2^31 - 1
-        if(num > 214748364) 
-            return sign == 1 ? 2147483647 : (-1) * 2147483648;  
-        num *= 10;
-
-        if(num >= 2147483640 && *s - '0' > 7)  
-            return sign == 1 ? 2147483647 : (-1) * 2147483648;   
-        num += *s - '0';
+        num = num * 10 + *s - '0';
+        
+        if((int)num != num)
+            return sign == 1 ? MAX : MIN;   
     }
 
     return sign * num;
