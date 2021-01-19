@@ -17,7 +17,6 @@ struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *he
     p = headA;
     q = headB;
     
-
     while(p != q)
     {
         p = p == NULL ? headB : p->next;
